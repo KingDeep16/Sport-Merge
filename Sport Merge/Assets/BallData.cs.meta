@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 9e437d4330df33a439bbf0a27a54a17b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ballSprite: {fileID: -6464869995595449900, guid: 9d4b2ba502fbd2640be64b1343c8a293, type: 3}
+  - nextTier: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e437d4330df33a439bbf0a27a54a17b, type: 3}
+  m_Name: Golf Ball
+  m_EditorClassIdentifier: Assembly-CSharp::BallData
+  ballName: Golf Ball
+  ballSprite: {fileID: 5583141051304231123, guid: 5a63aba998475f04990477d4d7dc7cde, type: 3}
+  scale: 0.15
+  mass: 1
+  scoreValue: 10
+  nextTier: {fileID: 11400000, guid: 273af2a3f3f9ca248b385d2335442009, type: 2}
