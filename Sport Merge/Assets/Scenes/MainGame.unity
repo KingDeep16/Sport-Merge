@@ -587,6 +587,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867356903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867356905}
+  - component: {fileID: 867356904}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &867356904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867356903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f54178dd542d14c808fb53afe0f04f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!4 &867356905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867356903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.26103, y: -0.04143, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &973603748
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,8 +761,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 018df927916f6c746b00398adda8fb8f, type: 2}
   - {fileID: 11400000, guid: fd5e6fe14e35fdd45b77ed46b7c64309, type: 2}
   - {fileID: 11400000, guid: f4c99c75b9e3a8944ad7d323772ff46a, type: 2}
-  - {fileID: 11400000, guid: bbf2c87c3e482584597832cbd8e161ea, type: 2}
   - {fileID: 11400000, guid: 4fee97213d6866e45b5543a26438a11b, type: 2}
+  - {fileID: 11400000, guid: bbf2c87c3e482584597832cbd8e161ea, type: 2}
 --- !u!1 &1408343885
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1408343887}
   - component: {fileID: 1408343886}
+  - component: {fileID: 1408343888}
   m_Layer: 0
   m_Name: GameOver Sensor
   m_TagString: Untagged
@@ -791,12 +836,25 @@ Transform:
   m_GameObject: {fileID: 1408343885}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 5.97, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 5.4, z: 0}
+  m_LocalScale: {x: 10, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408343888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408343885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54edcedca35241d499f8b75da5523b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  timeToFail: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -809,3 +867,4 @@ SceneRoots:
   - {fileID: 973603750}
   - {fileID: 1408343887}
   - {fileID: 1103903085}
+  - {fileID: 867356905}

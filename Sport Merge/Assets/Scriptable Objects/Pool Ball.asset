@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallData
   ballName: Pool Ball
   ballSprite: {fileID: -7854140664152144422, guid: 293c55377b957c14aabca79641b80e28, type: 3}
-  scale: 0.2
+  scale: 0.15
   mass: 1
   scoreValue: 10
   nextTier: {fileID: 11400000, guid: 9c8d6e55b494a194abebfa836658de1e, type: 2}

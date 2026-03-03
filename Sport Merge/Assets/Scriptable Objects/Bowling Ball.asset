@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallData
   ballName: Bowling Ball
   ballSprite: {fileID: 5420017299039677746, guid: ab17429bab920504ca000146c463eb69, type: 3}
-  scale: 0.4
+  scale: 0.35
   mass: 1
   scoreValue: 10
-  nextTier: {fileID: 11400000, guid: bbf2c87c3e482584597832cbd8e161ea, type: 2}
+  nextTier: {fileID: 11400000, guid: 4fee97213d6866e45b5543a26438a11b, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallData
   ballName: Golf Ball
   ballSprite: {fileID: 5583141051304231123, guid: 5a63aba998475f04990477d4d7dc7cde, type: 3}
-  scale: 0.15
+  scale: 0.1
   mass: 1
   scoreValue: 10
   nextTier: {fileID: 11400000, guid: 273af2a3f3f9ca248b385d2335442009, type: 2}

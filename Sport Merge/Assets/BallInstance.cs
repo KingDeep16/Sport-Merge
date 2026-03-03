@@ -33,4 +33,52 @@ public class BallInstance : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.mass = data.mass;
     }
+
+
+    private bool _isMerged = false; // Prevents multiple merges in one frame
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 1. Check if we hit another ball
+        if (collision.gameObject.TryGetComponent<BallInstance>(out BallInstance otherBall))
+        {
+            // 2. Do they have the same 'BallData'? (Must be the same sports ball)
+            if (this.data == otherBall.data)
+            {
+                // 3. Safety checks
+                if (_isMerged || otherBall._isMerged) return;
+                if (data.nextTier == null) return; // Already at the largest ball!
+
+                // 4. The "Winner" check
+                // Only the ball with the higher InstanceID handles the spawning
+                if (this.gameObject.GetInstanceID() < otherBall.gameObject.GetInstanceID())
+                {
+                    PerformMerge(otherBall);
+                }
+            }
+        }
+    }
+
+    private void PerformMerge(BallInstance other)
+    {
+        _isMerged = true;
+        other._isMerged = true;
+
+        // Calculate the midpoint between the two balls
+        Vector3 spawnPos = (transform.position + other.transform.position) / 2f;
+
+        // Spawn the new ball (using your existing Template Prefab)
+        GameObject newBallObj = Instantiate(gameObject, spawnPos, Quaternion.identity);
+        BallInstance newBallScript = newBallObj.GetComponent<BallInstance>();
+
+        // Initialize it with the NEXT tier data
+        newBallScript.Setup(data.nextTier);
+
+        // Ensure the new ball has physics enabled immediately
+        newBallObj.GetComponent<Rigidbody2D>().simulated = true;
+
+        // Destroy the two old balls
+        Destroy(other.gameObject);
+        Destroy(this.gameObject);
+    }
 }
