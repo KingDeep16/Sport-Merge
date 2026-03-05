@@ -1,6 +1,10 @@
+using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +14,35 @@ public class GameManager : MonoBehaviour
     public GameObject gameUIPanel;
     private bool _isGameStarted = false;
     private bool _isGameOver = false;
+    public GameObject gameplayContainer;
+    public GameObject ballContainer;
+    public GameObject ballTemplatePrefab;
+    public int score = 0;
+
+    [SerializeField] public List<BallData> spawnableTiers;
+
+    [Title("Main Menu")]
+    public UnityEngine.UI.Button resumeButton;
+      
+        [SerializeField] private float saveInterval = 5f;
+private float _saveTimer;
+
+    void Update()
+    {
+        // Check if a "SavedGame" key exists in PlayerPrefs
+        resumeButton.interactable = PlayerPrefs.HasKey("SavedBallCount");
+        _saveTimer += Time.deltaTime;
+
+        if (_saveTimer >= saveInterval)
+        {
+            if (spawnableTiers != null && spawnableTiers.Count > 0)
+            {
+                SaveGameState();
+                _saveTimer = 0;
+            }
+        }
+    }
+
 
     void Awake()
     {
@@ -24,7 +57,7 @@ public class GameManager : MonoBehaviour
         if (_isGameOver) return;
 
         _isGameOver = true;
-        Debug.Log("GAME OVER!");
+        UnityEngine.Debug.Log("GAME OVER!");
 
         // Potential Next Step: Show a UI panel here
         // For now, let's just restart after a delay
@@ -33,19 +66,19 @@ public class GameManager : MonoBehaviour
 
     public void ReturnHome()
     {
+        if (ballContainer != null)
+        {
+            foreach (Transform child in ballContainer.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
         Time.timeScale = 0f;
         mainMenuPanel.SetActive(true);
         gameUIPanel.SetActive(false);
+
     }
 
-    public void StartGame()
-    {
-        mainMenuPanel.SetActive(false);
-        gameUIPanel.SetActive(true);
-
-        // Start the delay sequence so the "Play" click doesn't drop a ball
-        StartCoroutine(ResumeTimeWithDelay());
-    }
 
     private IEnumerator ResumeTimeWithDelay()
     {
@@ -53,6 +86,79 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         Time.timeScale = 1f; // Physics and Spawner logic "wake up" now
-        Debug.Log("Game Clock Started!");
+        UnityEngine.Debug.Log("Game Clock Started!");
     }
-}
+
+    public void NewGame()
+    {
+        if (ballContainer != null)
+        {
+            foreach (Transform child in ballContainer.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        // 1. Turn it off to kill old balls
+        gameplayContainer.SetActive(false);
+        gameplayContainer.SetActive(true);
+
+        mainMenuPanel.SetActive(false);
+        gameUIPanel.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
+    public void ResumeGame()
+    {
+        StartCoroutine(ResumeTimeWithDelay());
+        int savedCount = PlayerPrefs.GetInt("SavedBallCount", 0);
+        for (int i = 0; i < savedCount; i++)
+        {
+            float x = PlayerPrefs.GetFloat($"Ball_{i}_X");
+            float y = PlayerPrefs.GetFloat($"Ball_{i}_Y");
+            int tierIndex = PlayerPrefs.GetInt($"Ball_{i}_TierIndex");
+
+            // Use the index to grab the correct SO from your List
+            if (tierIndex >= 0 && tierIndex < spawnableTiers.Count)
+            {
+                BallData data = spawnableTiers[tierIndex];
+
+                GameObject newBall = Instantiate(ballTemplatePrefab, new Vector3(x, y, 0), Quaternion.identity);
+                newBall.transform.SetParent(ballContainer.transform);
+
+                // Re-initialize the ball with its physics and data
+                newBall.GetComponent<BallInstance>().Setup(data);
+                newBall.GetComponent<Rigidbody2D>().simulated = true;
+            }
+        }
+        // Just close the menu and unfreeze
+        mainMenuPanel.SetActive(false);
+        gameUIPanel.SetActive(true);
+        Time.timeScale = 1f;
+        
+    }
+
+    public void SaveGameState()
+    {
+        // 1. Clear old save data
+        PlayerPrefs.SetInt("SavedBallCount", ballContainer.transform.childCount);
+        PlayerPrefs.SetInt("SavedScore", score);
+
+        // 2. Loop through your container (the one you set up earlier!)
+        for (int i = 0; i < ballContainer.transform.childCount; i++)
+        {
+            Transform ball = ballContainer.transform.GetChild(i);
+            BallData ballData = ball.GetComponent<BallInstance>().data; // Accessing your SO
+
+            // Find the index of this SO in your evolution list
+            int tierIndex = spawnableTiers.IndexOf(ballData);
+
+            PlayerPrefs.SetFloat($"Ball_{i}_X", ball.position.x);
+            PlayerPrefs.SetFloat($"Ball_{i}_Y", ball.position.y);
+            PlayerPrefs.SetInt($"Ball_{i}_TierIndex", tierIndex);
+
+           
+        }
+        PlayerPrefs.Save();
+    }
+       
+    }

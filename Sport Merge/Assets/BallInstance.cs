@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallInstance : MonoBehaviour
@@ -73,6 +74,8 @@ public class BallInstance : MonoBehaviour
 
         // Initialize it with the NEXT tier data
         newBallScript.Setup(data.nextTier);
+
+        newBallObj.transform.SetParent(this.gameObject.transform.parent);
 
         // Ensure the new ball has physics enabled immediately
         newBallObj.GetComponent<Rigidbody2D>().simulated = true;

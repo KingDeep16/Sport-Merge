@@ -1,66 +1,81 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BallSpawner : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField] private GameObject ballTemplatePrefab;
-    [SerializeField] private List<BallData> spawnableTiers; // Tiers 0, 1, and 2
+    public GameManager gameManager;
+    // Tiers 0, 1, and 2
 
     [Header("Movement Bounds")]
     [SerializeField] private float leftWallX = -2f;
     [SerializeField] private float rightWallX = 3f;
     private bool _inputInitialized = false;
 
-    private GameObject _currentBall;
-    private bool _canDrop = true;
-
     void Start() => SpawnNextBall();
 
+    private GameObject _currentBall;
+    private bool _canDrop = true;
+    private Vector2 _inputPosition;
     [Header("Movement Settings")]
     [SerializeField] private float lerpSpeed = 15f; // Higher = faster follow
-
+    public GameObject BallContainer;
     private float _targetX;
+
+    private float _inputDelayTimer = 0.2f; // Short delay
+    private bool _isReady = false;
+
+    public void OnEnable()
+    {
+        _isReady = false;
+        _inputDelayTimer = 0.2f;
+    }
 
     void Update()
     {
-        // 1. If we aren't in play mode, stay reset
-        if (Time.timeScale == 0)
+        // 1. Safety Check (Pause/Game State)
+        if (Time.timeScale == 0) return;
+
+        if (!_isReady)
         {
-            _inputInitialized = false;
-            return;
+            _inputDelayTimer -= Time.deltaTime;
+            if (_inputDelayTimer <= 0) _isReady = true;
+            return; // Skip input handling until ready
         }
 
-        // 2. The "Safety Gate": Don't allow a drop until the user has 
-        // actually started a NEW touch/click AFTER the menu is gone.
-        if (Input.GetMouseButtonDown(0))
+        // 2. Get the New Input Data
+        var mouse = Mouse.current;
+        var touch = Touchscreen.current;
+
+        // 3. Handle Movement (X Position)
+        if (touch != null && touch.primaryTouch.press.isPressed)
         {
-            _inputInitialized = true;
+            _inputPosition = touch.primaryTouch.position.ReadValue();
+            UpdateTargetX(_inputPosition);
+        }
+        else if (mouse != null && mouse.leftButton.isPressed)
+        {
+            _inputPosition = mouse.position.ReadValue();
+            UpdateTargetX(_inputPosition);
         }
 
-        // 3. Only proceed with movement/dropping if the input started after play began
-        if (!_inputInitialized) return;
+        // 4. Handle Dropping (The "Up" event)
+        bool touchReleased = touch != null && touch.primaryTouch.press.wasReleasedThisFrame;
+        bool mouseReleased = mouse != null && mouse.leftButton.wasReleasedThisFrame;
 
-        // 1. Capture the Target X position based on Input
-        if (Input.touchCount > 0)
+        if ((touchReleased || mouseReleased) && _canDrop)
         {
-            Touch touch = Input.GetTouch(0);
-            _targetX = Camera.main.ScreenToWorldPoint(touch.position).x;
-
-            if (touch.phase == TouchPhase.Ended && _canDrop)
-                StartCoroutine(DropSequence());
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            _targetX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        }
-
-        if (Input.GetMouseButtonUp(0) && _canDrop)
             StartCoroutine(DropSequence());
+        }
 
-        // 2. Calculate Radius for Clamping
-        float currentRadius = 0.2f;
+        // 5. Apply the Smooth Movement (Keep your existing Lerp logic)
+        MoveSpawner();
+
+    // 2. Calculate Radius for Clamping
+    float currentRadius = 0.2f;
         if (_currentBall != null)
         {
             currentRadius = _currentBall.GetComponent<CircleCollider2D>().radius * _currentBall.transform.localScale.x;
@@ -75,10 +90,30 @@ public class BallSpawner : MonoBehaviour
         transform.position = new Vector3(smoothedX, transform.position.y, 0);
     }
 
-    void SpawnNextBall()
+    void UpdateTargetX(Vector2 screenPos)
     {
+        _targetX = Camera.main.ScreenToWorldPoint(screenPos).x;
+    }
+
+    void MoveSpawner()
+    {
+        float currentRadius = (_currentBall != null) ?
+            _currentBall.GetComponent<CircleCollider2D>().radius * _currentBall.transform.localScale.x : 0.2f;
+
+        float clampedX = Mathf.Clamp(_targetX, leftWallX + currentRadius, rightWallX - currentRadius);
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, clampedX, Time.deltaTime * lerpSpeed), transform.position.y, 0);
+    }
+
+
+public void SpawnNextBall()
+    {
+        if (gameManager == null || gameManager.spawnableTiers.Count == 0)
+        {
+            Debug.LogWarning("Waiting for GameManager to initialize...");
+            return;
+        }
         int randomIndex = Random.Range(0, 3);
-        BallData data = spawnableTiers[randomIndex];
+        BallData data = gameManager.spawnableTiers[randomIndex];
 
         _currentBall = Instantiate(ballTemplatePrefab, transform.position, Quaternion.identity);
         _currentBall.transform.SetParent(this.transform);
@@ -92,7 +127,7 @@ public class BallSpawner : MonoBehaviour
     IEnumerator DropSequence()
     {
         _canDrop = false;
-        _currentBall.transform.SetParent(null);
+        _currentBall.transform.SetParent(BallContainer.transform);
         _currentBall.GetComponent<Rigidbody2D>().simulated = true;
         _currentBall = null;
 
