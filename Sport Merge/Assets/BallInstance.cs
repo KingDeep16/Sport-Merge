@@ -4,8 +4,10 @@ using UnityEngine;
 public class BallInstance : MonoBehaviour
 {
     public BallData data;
+    GameManager manager;
     private CircleCollider2D _collider;
     private SpriteRenderer _spriteRenderer;
+    public int tierIndex;
 
     void Awake()
     {
@@ -16,6 +18,7 @@ public class BallInstance : MonoBehaviour
     public void Setup(BallData newData)
     {
         data = newData;
+
         _spriteRenderer.sprite = data.ballSprite;
 
         // 1. Reset scale to 1,1,1 first so our measurements are 'clean'
@@ -72,13 +75,15 @@ public class BallInstance : MonoBehaviour
         GameObject newBallObj = Instantiate(gameObject, spawnPos, Quaternion.identity);
         BallInstance newBallScript = newBallObj.GetComponent<BallInstance>();
 
+        
         // Initialize it with the NEXT tier data
         newBallScript.Setup(data.nextTier);
-
         newBallObj.transform.SetParent(this.gameObject.transform.parent);
 
         // Ensure the new ball has physics enabled immediately
         newBallObj.GetComponent<Rigidbody2D>().simulated = true;
+
+
 
         // Destroy the two old balls
         Destroy(other.gameObject);

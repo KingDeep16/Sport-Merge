@@ -17,4 +17,5 @@ MonoBehaviour:
   scale: 0.2
   mass: 1
   scoreValue: 10
+  NextIndex: 6
   nextTier: {fileID: 11400000, guid: f4c99c75b9e3a8944ad7d323772ff46a, type: 2}

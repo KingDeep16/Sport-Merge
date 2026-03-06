@@ -8,5 +8,6 @@ public class BallData : ScriptableObject
     public float scale = 1f;
     public float mass = 1f;
     public int scoreValue = 10;
-    public BallData nextTier; // Drag the next ball in the sequence here!
+    public int NextIndex;
+    public BallData nextTier; // Drag the next ball in the sequence here
 }

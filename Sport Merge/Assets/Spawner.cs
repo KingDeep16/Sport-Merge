@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BallSpawner : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class BallSpawner : MonoBehaviour
     [SerializeField] private float leftWallX = -2f;
     [SerializeField] private float rightWallX = 3f;
     private bool _inputInitialized = false;
+    public Image nextBallImageUI;
 
     void Start() => SpawnNextBall();
 
@@ -114,6 +116,7 @@ public void SpawnNextBall()
         }
         int randomIndex = Random.Range(0, 3);
         BallData data = gameManager.spawnableTiers[randomIndex];
+        nextBallImageUI.sprite = data.ballSprite;
 
         _currentBall = Instantiate(ballTemplatePrefab, transform.position, Quaternion.identity);
         _currentBall.transform.SetParent(this.transform);
