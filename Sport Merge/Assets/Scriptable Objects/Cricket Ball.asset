@@ -16,6 +16,6 @@ MonoBehaviour:
   ballSprite: {fileID: -8143146637658274398, guid: d34537d93724b424591edb80aabf7571, type: 3}
   scale: 0.14
   mass: 1
-  scoreValue: 10
+  scoreValue: 40
   NextIndex: 4
   nextTier: {fileID: 11400000, guid: 85978cef4f2aae04db36093d65661c4a, type: 2}

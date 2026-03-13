@@ -2,6 +2,8 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,6 +13,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; // Singleton pattern for easy access
     public GameObject mainMenuPanel;
     public GameObject pausePanel;
+    public TextMeshProUGUI pauseScoreText;
+    public TextMeshProUGUI pauseHighScoreText;
     public GameObject gameUIPanel;
     private bool _isGameStarted = false;
     private bool _isGameOver = false;
@@ -18,6 +22,10 @@ public class GameManager : MonoBehaviour
     public GameObject ballContainer;
     public GameObject ballTemplatePrefab;
     public int score = 0;
+    public int highScore;
+    public bool isPaused = false;
+
+    public TextMeshProUGUI scoreText;
 
     [SerializeField] public List<BallData> spawnableTiers;
 
@@ -26,6 +34,16 @@ public class GameManager : MonoBehaviour
       
         [SerializeField] private float saveInterval = 5f;
 private float _saveTimer;
+
+    void Start()
+    {
+        UpdateScoreUI(0);
+        if (PlayerPrefs.GetInt("HighScore", 0) != null)
+        {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
+        }
+        
+    }
 
     void Update()
     {
@@ -43,8 +61,48 @@ private float _saveTimer;
         }
     }
 
+    public void AddScore(int pointsToAdd)
+    {
+        score += pointsToAdd;
+        UpdateScoreUI(score);
 
-    void Awake()
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
+    }
+
+    private void UpdateScoreUI(int score)
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f; // FREEZES all physics and movement
+
+        // Update the UI text right before showing the panel
+        pauseScoreText.text = score.ToString();
+        pauseHighScoreText.text = highScore.ToString();
+
+        pausePanel.SetActive(true);
+    }
+
+    public void UnpauseGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // UNFREEZES the game
+        pausePanel.SetActive(false);
+    }
+
+
+void Awake()
     {
         // Simple Singleton setup
         if (Instance == null) Instance = this;
@@ -76,6 +134,7 @@ private float _saveTimer;
         Time.timeScale = 0f;
         mainMenuPanel.SetActive(true);
         gameUIPanel.SetActive(false);
+        pausePanel.SetActive(false);
 
     }
 
@@ -104,6 +163,7 @@ private float _saveTimer;
 
         mainMenuPanel.SetActive(false);
         gameUIPanel.SetActive(true);
+        pausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
 

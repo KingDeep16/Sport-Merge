@@ -9,7 +9,8 @@ public class BallSpawner : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject ballTemplatePrefab;
     public GameManager gameManager;
-    // Tiers 0, 1, and 2
+    private BallData _nextBallData;
+    private BallData _pendingBallData; // The one waiting in limbo during the 0.8s cooldown
 
     [Header("Movement Bounds")]
     [SerializeField] private float leftWallX = -2f;
@@ -38,6 +39,8 @@ public class BallSpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
+
         // 1. Safety Check (Pause/Game State)
         if (Time.timeScale == 0) return;
 
@@ -106,7 +109,7 @@ public class BallSpawner : MonoBehaviour
         transform.position = new Vector3(Mathf.Lerp(transform.position.x, clampedX, Time.deltaTime * lerpSpeed), transform.position.y, 0);
     }
 
-
+   
 public void SpawnNextBall()
     {
         if (gameManager == null || gameManager.spawnableTiers.Count == 0)
@@ -114,9 +117,17 @@ public void SpawnNextBall()
             Debug.LogWarning("Waiting for GameManager to initialize...");
             return;
         }
-        int randomIndex = Random.Range(0, 3);
-        BallData data = gameManager.spawnableTiers[randomIndex];
-        nextBallImageUI.sprite = data.ballSprite;
+        if (_nextBallData == null)
+        {
+            // Prime the pump for the very first drop
+            int firstIndex = Random.Range(0, 3);
+            _pendingBallData = gameManager.spawnableTiers[firstIndex];
+
+            int nextIndex = Random.Range(0, 3);
+            _nextBallData = gameManager.spawnableTiers[nextIndex];
+            nextBallImageUI.sprite = _nextBallData.ballSprite;
+        }
+
 
         _currentBall = Instantiate(ballTemplatePrefab, transform.position, Quaternion.identity);
         _currentBall.transform.SetParent(this.transform);
@@ -124,7 +135,7 @@ public void SpawnNextBall()
         Rigidbody2D rb = _currentBall.GetComponent<Rigidbody2D>();
         rb.simulated = false; // Disable physics while holding
 
-        _currentBall.GetComponent<BallInstance>().Setup(data);
+        _currentBall.GetComponent<BallInstance>().Setup(_pendingBallData);
     }
 
     IEnumerator DropSequence()
@@ -134,9 +145,20 @@ public void SpawnNextBall()
         _currentBall.GetComponent<Rigidbody2D>().simulated = true;
         _currentBall = null;
 
-        yield return new WaitForSeconds(0.8f); // Cooldown for polish
+        yield return new WaitForSeconds(0.8f);
+        _pendingBallData = _nextBallData;
+
+        // 2. Roll a brand new ball for the UI so the player can see it during the cooldown
+        int randomIndex = Random.Range(0, 3);
+        _nextBallData = gameManager.spawnableTiers[randomIndex];
+        nextBallImageUI.sprite = _nextBallData.ballSprite;
+
+        yield return new WaitForSeconds(0.2f); // Cooldown for polish
         SpawnNextBall();
         _canDrop = true;
         _inputInitialized = false;
     }
 }
+
+
+

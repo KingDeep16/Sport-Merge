@@ -83,7 +83,11 @@ public class BallInstance : MonoBehaviour
         // Ensure the new ball has physics enabled immediately
         newBallObj.GetComponent<Rigidbody2D>().simulated = true;
 
-
+        if (GameManager.Instance != null)
+        {
+            // We add the points associated with the NEW ball we just created
+            GameManager.Instance.AddScore(data.nextTier.scoreValue);
+        }
 
         // Destroy the two old balls
         Destroy(other.gameObject);

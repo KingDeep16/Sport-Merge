@@ -1,5 +1,7 @@
 ﻿<Solution>
+  <Project Path="FastScriptReload.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="FastScriptReload.Runtime.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
 </Solution>
