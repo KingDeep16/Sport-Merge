@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; // Singleton pattern for easy access
     public GameObject mainMenuPanel;
     public GameObject pausePanel;
+    public GameObject gameOverPanel;
     public TextMeshProUGUI pauseScoreText;
     public TextMeshProUGUI pauseHighScoreText;
+    public TextMeshProUGUI GOScoreText;
+    public TextMeshProUGUI GOHighScoreText;
     public GameObject gameUIPanel;
-    private bool _isGameStarted = false;
     private bool _isGameOver = false;
     public GameObject gameplayContainer;
     public GameObject ballContainer;
@@ -97,7 +99,7 @@ private float _saveTimer;
     public void UnpauseGame()
     {
         isPaused = false;
-        Time.timeScale = 1f; // UNFREEZES the game
+       StartCoroutine(ResumeTimeWithDelay());
         pausePanel.SetActive(false);
     }
 
@@ -115,11 +117,15 @@ void Awake()
         if (_isGameOver) return;
 
         _isGameOver = true;
-        UnityEngine.Debug.Log("GAME OVER!");
+        Time.timeScale = 0f;
+        GOScoreText.text = score.ToString();
+        GOHighScoreText.text = highScore.ToString();
+        gameOverPanel.SetActive(true);
 
-        // Potential Next Step: Show a UI panel here
-        // For now, let's just restart after a delay
-        Invoke("RestartGame", 3f);
+        PlayerPrefs.DeleteKey("SavedBallCount");
+        PlayerPrefs.Save();
+
+
     }
 
     public void ReturnHome()
@@ -142,7 +148,7 @@ void Awake()
     private IEnumerator ResumeTimeWithDelay()
     {
         // Realtime ignores the fact that the game is "frozen"
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.8f);
 
         Time.timeScale = 1f; // Physics and Spawner logic "wake up" now
         UnityEngine.Debug.Log("Game Clock Started!");
@@ -150,6 +156,8 @@ void Awake()
 
     public void NewGame()
     {
+        
+
         if (ballContainer != null)
         {
             foreach (Transform child in ballContainer.transform)
@@ -157,14 +165,15 @@ void Awake()
                 Destroy(child.gameObject);
             }
         }
-        // 1. Turn it off to kill old balls
-        gameplayContainer.SetActive(false);
-        gameplayContainer.SetActive(true);
-
+        
+        StartCoroutine(ResumeTimeWithDelay());
+        isPaused = false;
+        score = 0;
+        UpdateScoreUI(score);
         mainMenuPanel.SetActive(false);
         gameUIPanel.SetActive(true);
         pausePanel.SetActive(false);
-        Time.timeScale = 1f;
+        
     }
 
     public void ResumeGame()

@@ -46,7 +46,7 @@ public class BallSpawner : MonoBehaviour
 
         if (!_isReady)
         {
-            _inputDelayTimer -= Time.deltaTime;
+            _inputDelayTimer -= Time.deltaTime + 0.2f;
             if (_inputDelayTimer <= 0) _isReady = true;
             return; // Skip input handling until ready
         }
