@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bf902987f080a43f4a3189f0a711400b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/Toggle_Switch_White.prefab
+  uploadId: 714416

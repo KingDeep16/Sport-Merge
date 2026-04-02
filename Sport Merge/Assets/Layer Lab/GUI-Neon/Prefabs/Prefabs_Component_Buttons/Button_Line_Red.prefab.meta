@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e249f554b1b7d46f997e3ab77e844f7a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Buttons/Button_Line_Red.prefab
+  uploadId: 714416

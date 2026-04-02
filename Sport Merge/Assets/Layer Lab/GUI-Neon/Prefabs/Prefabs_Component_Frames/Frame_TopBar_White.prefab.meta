@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2e8c5a23f51004488a8d8f545f1f4cf5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Frames/Frame_TopBar_White.prefab
+  uploadId: 714416

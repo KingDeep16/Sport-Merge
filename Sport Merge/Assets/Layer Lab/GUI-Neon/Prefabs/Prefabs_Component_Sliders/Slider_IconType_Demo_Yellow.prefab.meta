@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 54c3c8ca2b8214a3c9e08352392f5e48
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Demo_Yellow.prefab
+  uploadId: 714416

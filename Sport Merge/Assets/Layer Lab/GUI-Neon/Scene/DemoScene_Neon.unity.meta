@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 59af648212c594fdb8d95b5fab40397b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Scene/DemoScene_Neon.unity
+  uploadId: 714416

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5448d93b4ffaa417e83679a0251d486b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/Toggle_Check_Demo-Group.prefab
+  uploadId: 714416

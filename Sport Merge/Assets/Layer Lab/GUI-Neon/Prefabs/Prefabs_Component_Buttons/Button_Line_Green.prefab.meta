@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8740d4b604535428a82549a77a57414e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Buttons/Button_Line_Green.prefab
+  uploadId: 714416

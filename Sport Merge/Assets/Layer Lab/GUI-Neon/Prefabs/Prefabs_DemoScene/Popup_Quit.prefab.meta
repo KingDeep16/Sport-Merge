@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 888a41bbe519d4e11baa8d882383e400
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_DemoScene/Popup_Quit.prefab
+  uploadId: 714416

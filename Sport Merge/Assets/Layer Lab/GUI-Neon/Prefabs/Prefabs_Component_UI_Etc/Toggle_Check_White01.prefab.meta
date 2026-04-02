@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 22989001545e1401d8963fd4866fcdaa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/Toggle_Check_White01.prefab
+  uploadId: 714416

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2f7d245e5bcff445f8fc7a3125188640
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Frames/Frame_Circle_Blue.prefab
+  uploadId: 714416

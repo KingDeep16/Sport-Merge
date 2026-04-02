@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3e9bf8183a5a84248bb7ce8dedb42656
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/ResourcesData/Fonts/OFL.txt
+  uploadId: 714416

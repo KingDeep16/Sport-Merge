@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4b2bca5796ca54b619fb937fafebdc20
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Demo_Sky.prefab
+  uploadId: 714416

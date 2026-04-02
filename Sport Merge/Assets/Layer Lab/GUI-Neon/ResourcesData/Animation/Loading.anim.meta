@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7b793af4293c84c87916a929b54d6537
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/ResourcesData/Animation/Loading.anim
+  uploadId: 714416

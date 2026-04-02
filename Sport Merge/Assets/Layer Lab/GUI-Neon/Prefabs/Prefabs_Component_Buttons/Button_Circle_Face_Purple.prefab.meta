@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 43298300ff27d46289034d0e6b846a4d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Buttons/Button_Circle_Face_Purple.prefab
+  uploadId: 714416

@@ -99,7 +99,7 @@ public class BallInstance : MonoBehaviour
         if (data.nextTier.mergeSound != null)
         {
 
-            AudioSource.PlayClipAtPoint(data.nextTier.mergeSound, Camera.main.transform.position);
+            GameManager.Instance.sfxSource.PlayOneShot(data.nextTier.mergeSound);
         }
         // Destroy the two old balls
         Destroy(other.gameObject);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bowling Ball
   m_EditorClassIdentifier: Assembly-CSharp::BallData
   mergeSound: {fileID: 8300000, guid: b772b2eaf2e796746a589d4b82256772, type: 3}
-  mergeParticles: {fileID: 0}
+  mergeParticles: {fileID: 3086842611639678206, guid: 19259f65ce5cce94b9bd5cd8de4726ab, type: 3}
   ballName: Bowling Ball
   ballSprite: {fileID: 5420017299039677746, guid: ab17429bab920504ca000146c463eb69, type: 3}
   scale: 0.22

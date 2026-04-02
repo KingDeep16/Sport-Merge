@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Basketball
   m_EditorClassIdentifier: Assembly-CSharp::BallData
   mergeSound: {fileID: 8300000, guid: b772b2eaf2e796746a589d4b82256772, type: 3}
-  mergeParticles: {fileID: 0}
+  mergeParticles: {fileID: 3086842611639678206, guid: 19259f65ce5cce94b9bd5cd8de4726ab, type: 3}
   ballName: Basketball
   ballSprite: {fileID: -2103097836041421020, guid: 89e313acdf8c38740ab47ea7fa11b8c2, type: 3}
   scale: 0.24

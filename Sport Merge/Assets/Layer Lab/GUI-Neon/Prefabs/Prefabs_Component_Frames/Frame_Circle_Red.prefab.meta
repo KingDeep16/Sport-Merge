@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 18726f556990341b2ae7642f25034c13
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Frames/Frame_Circle_Red.prefab
+  uploadId: 714416

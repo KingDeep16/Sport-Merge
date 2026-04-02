@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8d8c9665e83694da7b4d747be6b9e992
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_DemoScene/Title.prefab
+  uploadId: 714416

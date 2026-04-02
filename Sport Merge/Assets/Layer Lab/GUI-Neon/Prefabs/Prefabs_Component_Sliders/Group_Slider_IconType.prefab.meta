@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b4c7690c5e7d94745a2138aa46bcbf70
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Sliders/Group_Slider_IconType.prefab
+  uploadId: 714416

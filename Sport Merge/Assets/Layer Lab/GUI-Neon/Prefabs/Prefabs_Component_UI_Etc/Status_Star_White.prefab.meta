@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4453d73e9fae1420287df220c59a836e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/Status_Star_White.prefab
+  uploadId: 714416

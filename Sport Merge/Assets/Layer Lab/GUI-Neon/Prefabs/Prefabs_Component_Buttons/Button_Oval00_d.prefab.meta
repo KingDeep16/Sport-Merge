@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e0ecc6e688b564cea8e39b98ccb9e2fe
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Buttons/Button_Oval00_d.prefab
+  uploadId: 714416

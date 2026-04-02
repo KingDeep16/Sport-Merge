@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fa227a4bd6c9746a6b61d52f423d3193
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/PageNavi_Demo.prefab
+  uploadId: 714416

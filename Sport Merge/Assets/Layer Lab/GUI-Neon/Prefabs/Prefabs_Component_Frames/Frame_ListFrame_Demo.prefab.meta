@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ae5b36a87ba0248bdbe8a3b7f17325eb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Frames/Frame_ListFrame_Demo.prefab
+  uploadId: 714416

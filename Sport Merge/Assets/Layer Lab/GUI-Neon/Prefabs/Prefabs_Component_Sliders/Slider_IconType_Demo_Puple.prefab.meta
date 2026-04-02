@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba0d5e686b50e42e28b208323d148bfc
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Demo_Puple.prefab
+  uploadId: 714416

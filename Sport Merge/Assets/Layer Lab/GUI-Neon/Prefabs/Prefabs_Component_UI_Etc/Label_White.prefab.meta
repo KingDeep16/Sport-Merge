@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2611f52f78ea0464299e6071809eda83
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_UI_Etc/Label_White.prefab
+  uploadId: 714416

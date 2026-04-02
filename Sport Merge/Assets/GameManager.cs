@@ -5,8 +5,11 @@ using System.Diagnostics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +42,8 @@ private float _saveTimer;
 
     void Start()
     {
+        LoadAudioSettings();
+
         UpdateScoreUI(0);
         if (PlayerPrefs.GetInt("HighScore", 0) != null)
         {
@@ -182,6 +187,8 @@ void Awake()
 
         isPaused = false;
 
+        score = PlayerPrefs.GetInt("SavedScore", 0);
+
         int savedCount = PlayerPrefs.GetInt("SavedBallCount", 0);
         for (int i = 0; i < savedCount; i++)
         {
@@ -231,5 +238,54 @@ void Awake()
         }
         PlayerPrefs.Save();
     }
+
+    public GameObject settingspanel;
+    public void ToggleSettings()
+    {
+        settingspanel.SetActive(true);
+    }
+
+    public void UntoggleSettings()
+    {
+        settingspanel.SetActive(false);
+    }
+
+    [Header("Audio Settings")]
+    public AudioMixer mainMixer; // Drag your Audio Mixer here in the Inspector
+    public Slider musicSlider;
+    public Slider sfxSlider;
+    public AudioSource sfxSource;
+
+    public void SetMusicVolume(float sliderValue)
+    {
+        // Converts linear slider (0.0001 to 1) into logarithmic decibels (-80dB to 0dB)
+        mainMixer.SetFloat("MusicVol", Mathf.Log10(sliderValue) * 20);
+
+        // Save the setting so it remembers for the next time they play
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
+    }
+
+    public void SetSFXVolume(float sliderValue)
+    {
+        mainMixer.SetFloat("SFXVol", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", sliderValue);
+    }
+
+    private void LoadAudioSettings()
+    {
+        // Get the saved volumes. If no save exists yet, default to 1 (max volume).
+        float musicVol = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SFXVolume", 1f);
+
+        // Snap the UI sliders to the saved positions
+        if (musicSlider != null) musicSlider.value = musicVol;
+        if (sfxSlider != null) sfxSlider.value = sfxVol;
+
+        // Apply the actual volume to the Audio Mixer
+        SetMusicVolume(musicVol);
+        SetSFXVolume(sfxVol);
+    }
+
+
 
 }

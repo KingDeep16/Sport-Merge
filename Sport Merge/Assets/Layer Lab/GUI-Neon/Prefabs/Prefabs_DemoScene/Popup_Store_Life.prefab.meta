@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7da54be49df554965a2745f1c11e14ee
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_DemoScene/Popup_Store_Life.prefab
+  uploadId: 714416

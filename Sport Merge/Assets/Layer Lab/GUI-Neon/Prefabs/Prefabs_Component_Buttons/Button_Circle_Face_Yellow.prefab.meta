@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 43703354e24904ef9b37d75428cc8b65
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38123
+  packageName: GUI - Neon
+  packageVersion: 2.0.1
+  assetPath: Assets/Layer Lab/GUI-Neon/Prefabs/Prefabs_Component_Buttons/Button_Circle_Face_Yellow.prefab
+  uploadId: 714416

@@ -1,7 +1,12 @@
 ﻿<Solution>
   <Project Path="FastScriptReload.Editor.csproj" />
+  <Project Path="LeanCommon.csproj" />
+  <Project Path="LeanTransition.csproj" />
+  <Project Path="CW.Common.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="LeanGUI.csproj" />
   <Project Path="FastScriptReload.Runtime.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
+  <Project Path="LeanTransition.Editor.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
 </Solution>
