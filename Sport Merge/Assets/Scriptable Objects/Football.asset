@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e437d4330df33a439bbf0a27a54a17b, type: 3}
   m_Name: Football
   m_EditorClassIdentifier: Assembly-CSharp::BallData
+  mergeSound: {fileID: 8300000, guid: b772b2eaf2e796746a589d4b82256772, type: 3}
+  mergeParticles: {fileID: 3086842611639678206, guid: 19259f65ce5cce94b9bd5cd8de4726ab, type: 3}
   ballName: Football
   ballSprite: {fileID: -6464869995595449900, guid: 9d4b2ba502fbd2640be64b1343c8a293, type: 3}
   scale: 0.26

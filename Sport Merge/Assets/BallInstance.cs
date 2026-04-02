@@ -68,6 +68,8 @@ public class BallInstance : MonoBehaviour
         _isMerged = true;
         other._isMerged = true;
 
+      
+
         // Calculate the midpoint between the two balls
         Vector3 spawnPos = (transform.position + other.transform.position) / 2f;
 
@@ -89,6 +91,16 @@ public class BallInstance : MonoBehaviour
             GameManager.Instance.AddScore(data.nextTier.scoreValue);
         }
 
+        if (data.nextTier.mergeParticles != null)
+        {
+            Instantiate(data.nextTier.mergeParticles, spawnPos, Quaternion.identity);
+        }
+
+        if (data.nextTier.mergeSound != null)
+        {
+
+            AudioSource.PlayClipAtPoint(data.nextTier.mergeSound, Camera.main.transform.position);
+        }
         // Destroy the two old balls
         Destroy(other.gameObject);
         Destroy(this.gameObject);

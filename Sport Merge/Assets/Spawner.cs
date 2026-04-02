@@ -31,6 +31,10 @@ public class BallSpawner : MonoBehaviour
     private float _inputDelayTimer = 0.2f; // Short delay
     private bool _isReady = false;
 
+    [Header("Aiming Line")]
+    public LineRenderer aimingLine;
+    public LayerMask obstacleLayer;
+
     public void OnEnable()
     {
         _isReady = false;
@@ -46,9 +50,39 @@ public class BallSpawner : MonoBehaviour
 
         if (!_isReady)
         {
-            _inputDelayTimer -= Time.deltaTime + 0.2f;
+            _inputDelayTimer -= Time.deltaTime;
             if (_inputDelayTimer <= 0) _isReady = true;
             return; // Skip input handling until ready
+        }
+
+        // 2. --- AIMING LINE LOGIC ---
+        if (_currentBall != null && _canDrop)
+        {
+            // Turn the line on
+            aimingLine.enabled = true;
+            Vector2 ballPos = _currentBall.transform.position;
+
+            // Point A: The center of the ball you are holding
+            aimingLine.SetPosition(0, ballPos);
+
+            // Shoot an invisible laser straight down
+            RaycastHit2D hit = Physics2D.Raycast(ballPos, Vector2.down, 20f, obstacleLayer);
+
+            if (hit.collider != null)
+            {
+                // Point B: Exactly where the laser hits a dropped ball or the floor
+                aimingLine.SetPosition(1, hit.point);
+            }
+            else
+            {
+                // Fallback Point B: If it hits nothing, just draw it far down
+                aimingLine.SetPosition(1, ballPos + (Vector2.down * 15f));
+            }
+        }
+        else
+        {
+            // Turn the line off if we aren't holding a ball
+            if (aimingLine != null) aimingLine.enabled = false;
         }
 
         // 2. Get the New Input Data

@@ -179,6 +179,9 @@ void Awake()
     public void ResumeGame()
     {
         StartCoroutine(ResumeTimeWithDelay());
+
+        isPaused = false;
+
         int savedCount = PlayerPrefs.GetInt("SavedBallCount", 0);
         for (int i = 0; i < savedCount; i++)
         {
@@ -199,10 +202,9 @@ void Awake()
                 newBall.GetComponent<Rigidbody2D>().simulated = true;
             }
         }
-        // Just close the menu and unfreeze
         mainMenuPanel.SetActive(false);
         gameUIPanel.SetActive(true);
-        Time.timeScale = 1f;
+        
         
     }
 
