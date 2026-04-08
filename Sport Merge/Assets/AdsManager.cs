@@ -9,6 +9,10 @@ public class AdsManager : MonoBehaviour
     [Header("LevelPlay App Key")]
     public string androidAppKey = "25d9df44d";
 
+    [Header("UI References")]
+    public GameObject gameOverPanel;
+    public GameObject removeAdsButton;
+
     [Header("Ad Unit IDs")]
     [Tooltip("Leave these as default unless you created specific placements on the dashboard")]
     public string bannerAdUnitId = "lvvnp4758yklxagv";
@@ -19,7 +23,7 @@ public class AdsManager : MonoBehaviour
     public float timeBetweenAds = 180f; // 180 seconds = 3 minutes
     private float adTimer;
 
-    // The new modern Ad Objects
+   
     private LevelPlayBannerAd bannerAd;
     private LevelPlayInterstitialAd interstitialAd;
     private LevelPlayRewardedAd rewardedVideoAd;
@@ -54,7 +58,10 @@ public class AdsManager : MonoBehaviour
 
     private void OnInitializationComplete(LevelPlayConfiguration config)
     {
-        Debug.Log("LevelPlay Initialized Successfully! Loading ads...");
+        if (removeAdsButton != null && AreAdsRemoved())
+        {
+            removeAdsButton.SetActive(false);
+        }
 
         // --- SETUP REWARDED AD ---
         rewardedVideoAd = new LevelPlayRewardedAd(rewardedAdUnitId);
@@ -68,8 +75,13 @@ public class AdsManager : MonoBehaviour
         interstitialAd.LoadAd(); // Load the first one
 
         // --- SETUP BANNER AD ---
-        bannerAd = new LevelPlayBannerAd(bannerAdUnitId);
-        bannerAd.LoadAd();
+        if (!AreAdsRemoved())
+        {
+            bannerAd = new LevelPlayBannerAd(bannerAdUnitId);
+            bannerAd.LoadAd();
+        }
+
+       
     }
 
     private void OnInitializationFailed(LevelPlayInitError error)
@@ -92,10 +104,13 @@ public class AdsManager : MonoBehaviour
 
     public void ShowInterstitialAd()
     {
-        if (interstitialAd != null && interstitialAd.IsAdReady())
+        if (!AreAdsRemoved())
         {
-            Debug.Log("Showing Interstitial Ad...");
-            interstitialAd.ShowAd();
+            if (interstitialAd != null && interstitialAd.IsAdReady())
+            {
+                Debug.Log("Showing Interstitial Ad...");
+                interstitialAd.ShowAd();
+            }
         }
     }
 
@@ -123,8 +138,32 @@ public class AdsManager : MonoBehaviour
 
     private void RevivePlayer()
     {
-        // PUT YOUR REVIVE LOGIC HERE
-        Debug.Log("DESTROY 10 BALLS AND RESUME GAME!");
+        Debug.Log("Executing Smart Revive Logic...");
+
+        // 1. Hide the UI panels
+        if (ReviveUIController.Instance != null)
+        {
+            ReviveUIController.Instance.revivePanel.SetActive(false);
+        }
+
+        // 2. Find all the balls
+        GameObject[] ballArray = GameObject.FindGameObjectsWithTag("Ball");
+        System.Collections.Generic.List<GameObject> allBalls = new System.Collections.Generic.List<GameObject>(ballArray);
+
+        // 3. SORT the list by their Y position (highest to lowest)
+        allBalls.Sort((a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
+
+        // 4. Destroy the top 10 highest balls
+        int ballsToDestroy = Mathf.Min(10, allBalls.Count);
+        for (int i = 0; i < ballsToDestroy; i++)
+        {
+            Destroy(allBalls[i]);
+        }
+
+        Debug.Log($"Revive Complete! Destroyed {ballsToDestroy} balls.");
+
+        // 5. UNFREEZE TIME so the player can keep playing!
+        Time.timeScale = 1f;
     }
 
     private void OnDisable()
@@ -132,5 +171,36 @@ public class AdsManager : MonoBehaviour
         // Clean up memory when the game closes
         bannerAd?.DestroyAd();
         interstitialAd?.DestroyAd();
+    }
+
+
+    // Checks if the player has bought the IAP
+    public bool AreAdsRemoved()
+    {
+        // PlayerPrefs saves data to the phone. 0 = no, 1 = yes.
+        return PlayerPrefs.GetInt("AdsRemoved", 0) == 1;
+    }
+
+    // The IAP Button will call this method when the purchase is successful!
+    public void PurchaseRemoveAds()
+    {
+        PlayerPrefs.SetInt("AdsRemoved", 1);
+        PlayerPrefs.Save();
+
+        if (bannerAd != null)
+        {
+            bannerAd.DestroyAd();
+        }
+
+        if (removeAdsButton != null)
+        {
+            removeAdsButton.SetActive(false);
+        }
+    }
+
+    public bool IsRewardedAdReady()
+    {
+        // Returns true if the ad is loaded and ready, false if no internet/not loaded
+        return rewardedVideoAd != null && rewardedVideoAd.IsAdReady();
     }
 }

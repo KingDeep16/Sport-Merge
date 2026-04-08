@@ -14,7 +14,7 @@ public class GameOverLine : MonoBehaviour
 
             if (_timer >= timeToFail)
             {
-                GameManager.Instance.TriggerGameOver();
+                ReviveUIController.Instance.ShowRevivePopup();
             }
         }
     }

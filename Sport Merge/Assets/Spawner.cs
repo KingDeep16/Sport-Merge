@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BallSpawner : MonoBehaviour
 {
@@ -48,8 +49,15 @@ public class BallSpawner : MonoBehaviour
         // 1. Safety Check (Pause/Game State)
         if (Time.timeScale == 0) return;
 
-        if (!_isReady)
+
+        if (EventSystem.current.IsPointerOverGameObject())
         {
+            return; // Stop right here! Don't drop the ball.
+        }
+
+        if (!_isReady)
+            {
+            
             _inputDelayTimer -= Time.deltaTime;
             if (_inputDelayTimer <= 0) _isReady = true;
             return; // Skip input handling until ready
@@ -192,6 +200,8 @@ public void SpawnNextBall()
         _canDrop = true;
         _inputInitialized = false;
     }
+
+  
 }
 
 

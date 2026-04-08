@@ -146,6 +146,8 @@ void Awake()
         mainMenuPanel.SetActive(true);
         gameUIPanel.SetActive(false);
         pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        
 
     }
 
@@ -178,7 +180,8 @@ void Awake()
         mainMenuPanel.SetActive(false);
         gameUIPanel.SetActive(true);
         pausePanel.SetActive(false);
-        
+        gameOverPanel.SetActive(false);
+
     }
 
     public void ResumeGame()
