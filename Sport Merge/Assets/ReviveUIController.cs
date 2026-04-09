@@ -34,7 +34,7 @@ public class ReviveUIController : MonoBehaviour
     // Call this method when the player "dies"
     public void ShowRevivePopup()
     {
-        Time.timeScale = 0f; // Pause the game
+        Time.timeScale = 0f;
         revivePanel.SetActive(true);
         gameOverPanel.SetActive(false);
 
@@ -42,13 +42,30 @@ public class ReviveUIController : MonoBehaviour
         isCounting = true;
         skipButton.interactable = true;
 
+        // Grab the TextMeshPro component sitting inside the button
+        TextMeshProUGUI buttonText = watchAdButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        // THE CONTINGENCY CHECK:
         if (AdsManager.Instance != null && AdsManager.Instance.IsRewardedAdReady())
         {
             watchAdButton.interactable = true;
+
+            // Reset the text to normal if an ad is ready!
+            if (buttonText != null)
+            {
+                buttonText.text = "Revive";
+            }
         }
         else
         {
-            watchAdButton.interactable = false;
+            watchAdButton.interactable = false; // Grey out the button
+
+            // Tell the player exactly why they can't click it
+            if (buttonText != null)
+            {
+                buttonText.text = "No Ad Ready";
+            }
+          
         }
     }
 
