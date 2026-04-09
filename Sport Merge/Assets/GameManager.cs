@@ -191,6 +191,7 @@ void Awake()
         isPaused = false;
 
         score = PlayerPrefs.GetInt("SavedScore", 0);
+        UpdateScoreUI(score);
 
         int savedCount = PlayerPrefs.GetInt("SavedBallCount", 0);
         for (int i = 0; i < savedCount; i++)
